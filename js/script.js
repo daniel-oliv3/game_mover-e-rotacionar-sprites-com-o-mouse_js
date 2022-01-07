@@ -20,7 +20,14 @@ var objs = {
     centerY: function(){
         return this.y + this.height/2;
     }
-}
+};
+
+var mouse = {};
+
+cnv.addEventListener("mousemove", function(e){
+    mouse.x = e.clientX - cnv.offsetLeft;
+    mouse.y = e.clientY - cnv.offsetTop;
+}, false);
 
 function loop(){
     requestAnimationFrame(loop, cnv);
@@ -29,7 +36,14 @@ function loop(){
 }
 
 function update(){
-    
+    var dx = mouse.x - objs.centerX();
+    var dy = mouse.y - objs.centerY();
+    var distance = Math.sqrt(dx*dx + dy*dy);
+
+    if(distance >= 1){
+        objs.x += dx * .1;
+        objs.y += dy * .1;
+    }
 }
 
 function render(){
