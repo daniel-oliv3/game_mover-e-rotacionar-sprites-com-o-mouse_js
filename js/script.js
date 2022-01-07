@@ -10,7 +10,7 @@ img.addEventListener('load', function(){
 var objs = {
     x: 100,
     y: 100,
-    width: 800,
+    width: 80,
     height: 64,
     rotation: 0,
     img: img,
@@ -38,11 +38,14 @@ function loop(){
 function update(){
     var dx = mouse.x - objs.centerX();
     var dy = mouse.y - objs.centerY();
+
+    objs.rotation = Math.atan2(dy, dx);
+
     var distance = Math.sqrt(dx*dx + dy*dy);
 
     if(distance >= 1){
-        objs.x += dx * .1;
-        objs.y += dy * .1;
+        objs.x += dx * .05;
+        objs.y += dy * .05;
     }
 }
 
