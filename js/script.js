@@ -3,6 +3,9 @@ var ctx = cnv.getContext('2d');
 
 var img = new Image();
 img.src = "img/aviao.png";
+img.addEventListener('load', function(){
+    loop();
+}, false);
 
 var objs = {
     x: 100,
@@ -20,10 +23,9 @@ var objs = {
 }
 
 function loop(){
-    requestAnimationFrame(loop, cnv){
+    requestAnimationFrame(loop, cnv);
         update();
         render();
-    }
 }
 
 function update(){
@@ -31,5 +33,13 @@ function update(){
 }
 
 function render(){
-    
+    ctx.clearRect(0, 0, cnv.width, cnv.height);
+    ctx.save();
+    ctx.translate(objs.centerX(), objs.centerY());
+    ctx.rotate(objs.rotation);
+    ctx.drawImage(
+        objs.img, 0, 0, objs.width, objs.height,
+        -objs.width/2, -objs.height/2, objs.width, objs.height
+    );
+    ctx.restore();
 }
